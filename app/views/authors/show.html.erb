@@ -1,0 +1,21 @@
+<h1 class ="ml-3 mt-3">Voici l'auteur n=<%= params[:id].to_i %></h1>
+<p class ="ml-3 h5">
+	L'auteur: <%= @author.first_name %> <%= @author.last_name %> <br/> 
+	Sa description: <%= @author.description %> <br/> 
+	Son email: <%= @author.email %> <br/> 
+	Son age: <%= @author.age %> <br/> 
+	Sa ville: <%= City.find(@author.city_id).name %> <%= link_to "Plus d'infos sur la ville", city_path(City.find(@author.city_id)) %> <br/> 
+	<% if @author.gossips.to_a.empty? %>
+		Tu n'as pas encore écrit des potins
+	<% else %>
+		Ses potins: 
+		<% @author.gossips.to_a.each do |gsp| %> 
+		<ul class="h6">
+			<li> Le titre: <%= gsp.title %> </li>
+			<li> Le lien: <%= link_to "ici", gossip_path(gsp.id) %> </li>
+	   	</ul>
+		<% end %>
+	<% end %>
+
+	
+</p>
